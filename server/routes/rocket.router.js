@@ -6,6 +6,6 @@ const router = Router()
 router.post('/launchers', addRocket)
 router.get('/launchers', allRocket)
 router.get('/launchers/:id', getRocket)
-router.delete('/launchers:id', deleteOne)
+router.delete('/launchers/:id', deleteOne)
 
 export default router

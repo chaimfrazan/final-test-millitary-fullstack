@@ -2,19 +2,20 @@ import { serviceAddRocket, serviceDeleteRocket, serviceGetAllRockets, serviceGet
 
 export async function addRocket(req, res) {
     try {
-        const { city, rocketType, latitude, longitude, name } = req.body
-        console.log(user)
+        const { name, rocketType, latitude, longitude, city } = req.body
         if (!city || !rocketType || !latitude || !longitude || !name) {
             return res.status(400).json({
                 sucess: false,
                 message: "missing some of things",
             })
         }
+        const numLatitude = +latitude
+        const numLongitude = +longitude
         if (
             typeof city !== 'string' ||
             typeof rocketType !== 'string' ||
-            typeof latitude !== 'number' ||
-            typeof longitude !== 'number' ||
+            typeof numLatitude !== 'number' ||
+            typeof numLongitude !== 'number' ||
             typeof name !== 'string'
         ) {
             return res.status(400).json({
@@ -27,7 +28,7 @@ export async function addRocket(req, res) {
         if (respone) {
             res.status(201).json({
                 sucess: true,
-                rocket: rocket,
+                rocket: respone.rocket,
                 message: 'add rocket successfuly'
             })
         }
@@ -41,8 +42,11 @@ export async function addRocket(req, res) {
 
 export async function allRocket(req, res) {
     try {
-        const res = await serviceGetAllRockets()
-        res.status(200).json(res)
+        const respone = await serviceGetAllRockets()
+        res.status(200).json({
+            sucess: true,
+            rockets: respone,
+        })
     } catch (error) {
         res.status(500).json({ message: error.message });
     }
@@ -51,15 +55,18 @@ export async function allRocket(req, res) {
 export async function getRocket(req, res) {
     try {
         const { id } = req.params
-        const res = await serviceGetRocket(id)
-        if (res === 'not found') {
+        const respone = await serviceGetRocket(id)
+        if (respone === 'not found') {
             return res.status(401).json({
                 sucess: false,
                 message: "rocket not found",
             })
         }
         else {
-            res.status(200).json(res)
+            res.status(200).json({
+                sucess: true,
+                rockets: respone,
+            })
         }
     } catch (error) {
         res.status(500).json({ message: error.message });
@@ -68,14 +75,14 @@ export async function getRocket(req, res) {
 export async function deleteOne(req, res) {
     try {
         const { id } = req.params
-        const res = await serviceDeleteRocket(id)
-        if (res == 'not found') {
+        const respone = await serviceDeleteRocket(id)
+        if (respone == 'not found') {
             return res.status(401).json({
                 sucess: false,
                 message: "rocket not found",
             })
         }
-        if (res === 'delete') {
+        if (respone === 'delete') {
             res.status(200).json({
                 sucess: true,
                 message: "delete rocket sucessfuly",

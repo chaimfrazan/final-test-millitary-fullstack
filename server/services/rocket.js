@@ -15,7 +15,7 @@ export async function serviceAddRocket(city, rocketType, latitude, longitude, na
         longitude,
         name
     });
-    const res = await collection.findOne({ id: insert.insertedId });
+    const res = await collection.findOne({ _id: insert.insertedId });
     return {
         success: true,
         rocket: res
@@ -33,7 +33,7 @@ export async function serviceGetRocket(id) {
 }
 
 export async function serviceGetAllRockets() {
-    const rockets = await collection.find({})
+    const rockets = await collection.find({}).toArray()
     return rockets
 }
 
