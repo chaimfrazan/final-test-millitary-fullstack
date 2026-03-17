@@ -1,4 +1,4 @@
-import { serviceCreateUser, serviceUpdateUser, serviceDeleteUser, serviceGetUser, serviceLoginUser } from '../services/user.js'
+import { serviceCreateUser, serviceUpdateUser, serviceGetAllUsers, serviceDeleteUser, serviceGetUser, serviceLoginUser } from '../services/user.js'
 
 export async function createUser(req, res) {
     try {
@@ -120,6 +120,18 @@ export async function login(req, res) {
                 message: "login sucessfuly",
             })
         }
+    } catch (error) {
+        res.status(500).json({ message: error.message });
+    }
+}
+
+export async function getAllUsers(req, res) {
+    try {
+        const respone = await serviceGetAllUsers()
+        res.status(200).json({
+            sucess: true,
+            users: respone,
+        })
     } catch (error) {
         res.status(500).json({ message: error.message });
     }

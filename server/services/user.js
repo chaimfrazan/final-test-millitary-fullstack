@@ -99,3 +99,7 @@ export async function serviceLoginUser(username, password) {
     return "wrong pass"
 }
 
+export async function serviceGetAllUsers() {
+    const users = await collection.find({}).toArray()
+    return users
+}

@@ -1,6 +1,5 @@
-import { addRocket } from '../api/axios.js'
+import { addRocket } from '../../api/axios.js'
 import { useState } from 'react'
-import { useNavigate } from 'react-router-dom'
 
 function AddLauncher() {
     const [launcher, setLauncher] = useState({
@@ -12,7 +11,6 @@ function AddLauncher() {
     })
     const [loading, setLoading] = useState()
     const [message, setMessage] = useState('')
-    const navigate = useNavigate()
 
     const submit = async (e) => {
         e.preventDefault()
@@ -43,10 +41,6 @@ function AddLauncher() {
     return (
         <div>
             <h1 className='logo'>create launcher</h1>
-            <div className='navbar'>
-                <button onClick={() => navigate("/deatails/launcher")}>deatails launcher</button>
-                <button onClick={() => navigate("/")}>Home</button>
-            </div>
             <form className='form' onSubmit={submit}>
                 <label>name</label>
                 <input

@@ -8,7 +8,7 @@
   border-radius: 10px;
   flex-direction: column;
   background-color: rgb(218, 218, 218);
-  height: 80vh;
+  min-height: 40vh;
   width: 80%;
   margin-left: auto;
   margin-right: auto;
@@ -98,4 +98,13 @@ input:focus {
   margin-top: 20px;
   color: aliceblue;
   ;
+}
+
+p{
+  color: darkred;
+  margin-top: 10px;
+}
+
+h3{
+  color: darkred;
 }

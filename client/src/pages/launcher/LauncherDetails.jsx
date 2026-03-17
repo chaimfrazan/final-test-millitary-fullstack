@@ -1,13 +1,12 @@
 import { useEffect, useState } from 'react'
-import { getRocket ,deleteRocket} from '../api/axios.js'
-import { useNavigate, useParams } from 'react-router-dom'
+import { getRocket ,deleteRocket} from '../../api/axios.js'
+import { useParams } from 'react-router-dom'
 
 function LauncherDetails() {
     const { id } = useParams()
     const [loading, setLoading] = useState(true)
     const [rocket, setRocket] = useState({})
     const [message, setMessage] = useState('')
-    const navigate = useNavigate()
 
     useEffect(() => {
         async function rocketById() {
@@ -45,10 +44,6 @@ function LauncherDetails() {
     return (
         <div>
             <h1 className='logo'>the launcher details</h1>
-            <div className='navbar'>
-                <button onClick={() => navigate("/create/launcher")}>Add launcher</button>
-                <button onClick={() => navigate("/")}>Home</button>
-            </div>
             <table className="rockets-table">
                 <thead>
                     <tr>

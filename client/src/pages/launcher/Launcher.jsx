@@ -1,8 +1,8 @@
 import { useEffect, useState } from 'react'
-import { allRocket, getRocket } from '../api/axios.js'
-import { useNavigate, useParams } from 'react-router-dom'
+import { allRocket } from '../../api/axios.js'
+import { useNavigate } from 'react-router-dom'
 
-function LauncherDetails() {
+function Launcher() {
     const [launchers, setLounchers] = useState([])
     const [loading, setLoading] = useState(true)
     const [searchCity, setSearchCity] = useState('')
@@ -39,9 +39,6 @@ function LauncherDetails() {
     return (
         <div>
             <h1 className='logo'>all the launchers</h1>
-            <div className='navbar'>
-                <button onClick={() => navigate("/create/launcher")}>Add launcher</button>
-            </div>
             <div className='filter-bar'>
                 <input
                     className='search-input'
@@ -82,7 +79,7 @@ function LauncherDetails() {
                             <td> {launcher.latitude} </td>
                             <td>{launcher.longitude}</td>
                             <td>{launcher.city}</td>
-                            <td> <button onClick={() => navigate(`/deatails/launcher/${launcher._id}`)}>details</button> </td>
+                            <td> <button onClick={() => navigate(`/details/launcher/${launcher._id}`)}>details</button> </td>
                         </tr>
                     ))}
                 </tbody>
@@ -91,4 +88,4 @@ function LauncherDetails() {
     )
 }
 
-export default LauncherDetails
+export default Launcher
